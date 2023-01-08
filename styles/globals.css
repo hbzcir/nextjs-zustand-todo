@@ -1,0 +1,29 @@
+:root {
+    --font-base_Pretendard: Pretendard;
+    --base: #585858;
+    --placeholder: #BABABA;
+    --border: #DFDFDF;
+    --positive: #2051FF;
+    --white: #FFFFFF;
+    --darken: #1E1E1E;
+    --negative: #FF4D4F;
+
+    --b-radius: 4px;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-base_Pretendard);
+  font-size: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
