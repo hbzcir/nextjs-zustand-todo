@@ -20,7 +20,7 @@ const InputText = styled.input`
   font-size: 14px;
   line-height: 17px;
   padding: 10px 16px 9px;
-  border: 1px solid val(--border);
+  border: 1px solid var(--border);
   border-radius: 4px;
   outline: transparent;
 `

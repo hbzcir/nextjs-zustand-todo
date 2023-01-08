@@ -9,8 +9,8 @@ export default Add;
 const Button = styled.button`
   width: 100%;
   height: 36px;
-  color: val(--white);
+  color: var(--white);
   border: 0;
-  border-radius: val(--b-radius);
+  border-radius: var(--b-radius);
   background: (--placeholder);
 `
