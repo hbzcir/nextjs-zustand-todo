@@ -3,7 +3,7 @@ import Head from 'next/head';
 import TodoItem from '../components/TodoItem/TodoItem';
 import styled from 'styled-components';
 import Input from '../components/Input';
-import Button from 'components/Button';
+import Button from '../components/Button';
 import uniqid from 'uniqid';
 
 // export type TodoT = {
