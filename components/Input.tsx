@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-const StyleInput = styled.input.attrs(props => ({
-  type: "text",
-}))`
+const StyleInput = styled.input`
   width: 100%;
   height: 36px;
   font-weight: 400;
@@ -12,8 +10,10 @@ const StyleInput = styled.input.attrs(props => ({
   border-radius: 4px;
   outline: transparent;
 `
-const Input = (props: any) => {
-  
-  return (<><StyleInput value={props.text} /></>);
+const Input = (props :any) => {
+  return (<> 
+    <label>{props.completed}</label>
+    <StyleInput type="text" value={props.text} />
+  </>);
 }
 export default Input;

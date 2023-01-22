@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import uniqid from 'uniqid';
+import React, { ReactEventHandler, useState } from 'react';
 import Head from 'next/head';
 import TodoItem from '../components/TodoItem/TodoItem';
 import styled from 'styled-components';
-//import Input from '../components/Input';
+import Input from '../components/Input';
 // import Button from '../components/Button';
 
 export type TodoT = { //export type은 타입 문맥에 사용할 export만 제공하며, 이 또한 TypeScript의 출력물에서 제거.
@@ -18,13 +17,10 @@ export default function Home() {
   const testLog = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.dir(e.target.value);
   }
-  const onChangeInput = () => {
-
-  }
   const addTodo = () => {
     const newTodo: TodoT = {
       text: newInput,
-      id: uniqid(),//(Math.floor(Math.random() * (100 - 1 + 1)) + 1).toString(),
+      id: (Math.floor(Math.random() * (100 - 1 + 1)) + 1).toString(),
       completed: false,
     };
     setTodos((prev) => {
@@ -45,14 +41,13 @@ export default function Home() {
           <Title>Simple Todo</Title>
           {
             todos?.map(todo => ( 
-            <>
+              // <p key={todo.id}>{todo.text}</p>
               <TodoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
-            </>
             ))
           }
           <input type="text" value={newInput} onChange={(e) => {setNewInput(e.target.value)}} />
           <button onClick={addTodo}>등록</button>
-          {/* <Input value={newInput} onChange={(e: any) => {setNewInput(e.target.value)}} /> */}
+          <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setNewInput(e.target.value)}} />
           {/* <Button onClick={addTodo}>등록 실행 불가 </Button> */}
        
         </Todo>
@@ -81,5 +76,4 @@ const Container = styled.main`
   justify-content: center;
   padding: 25px;
 `;
-
 
