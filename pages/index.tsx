@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import uniqid from 'uniqid';
 import Head from 'next/head';
 import TodoItem from '../components/TodoItem/TodoItem';
 import styled from 'styled-components';
@@ -23,7 +24,7 @@ export default function Home() {
   const addTodo = () => {
     const newTodo: TodoT = {
       text: newInput,
-      id: (Math.floor(Math.random() * (100 - 1 + 1)) + 1).toString(),
+      id: uniqid(),//(Math.floor(Math.random() * (100 - 1 + 1)) + 1).toString(),
       completed: false,
     };
     setTodos((prev) => {
@@ -44,8 +45,9 @@ export default function Home() {
           <Title>Simple Todo</Title>
           {
             todos?.map(todo => ( 
-              <p key={todo.id}>{todo.text}</p>
-            // <TodoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
+            <>
+              <TodoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
+            </>
             ))
           }
           <input type="text" value={newInput} onChange={(e) => {setNewInput(e.target.value)}} />
@@ -79,4 +81,5 @@ const Container = styled.main`
   justify-content: center;
   padding: 25px;
 `;
+
 
