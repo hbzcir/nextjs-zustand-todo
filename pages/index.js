@@ -1,31 +1,17 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Head from 'next/head';
 import TodoItem from '../components/TodoItem/TodoItem';
 import styled from 'styled-components';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import uniqid from 'uniqid';
-
-// export type TodoT = {
-//   id: string;
-//   text: String;
-//   completed: boolean;
-// };
+import useTodos from '../hooks/useTodos';
 
 export default function Home() {
-  const [todos, setTodos] = useState([]);
-  const [newInput, setNewInput] = useState('');
+  const { todos, newInput, setNewInput, addTodo } = useTodos();
 
-  const addTodo = () => {
-    const newTodo = {
-      text: newInput,
-      id: uniqid(),
-      completed: false,
-    };
-    setTodos((prev) => {
-      return [...prev, newTodo];
-    });
-  };
+  const filteredTodo = useMemo(() => {
+    return todos.filter((todo) => todo.completed === false);
+  }, [todos]);
 
   return (
     <>
@@ -38,7 +24,7 @@ export default function Home() {
       <Container>
         <Todo>
           <Title>Simple Todo</Title>
-          {todos?.map((todo) => (
+          {filteredTodo.map((todo) => (
             <TodoItem
               key={todo.id}
               id={todo.id}
