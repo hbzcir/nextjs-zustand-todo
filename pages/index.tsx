@@ -1,33 +1,33 @@
-import React, { ReactEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import TodoItem from '../components/TodoItem/TodoItem';
 import styled from 'styled-components';
 import Input from '../components/Input';
-// import Button from '../components/Button';
+import Button from 'components/Button';
+import uniqid from 'uniqid';
 
-export type TodoT = { //export type은 타입 문맥에 사용할 export만 제공하며, 이 또한 TypeScript의 출력물에서 제거.
-  id: string,
-  text: String,
-  completed: boolean,
+export type TodoT = {
+  //export type은 타입 문맥에 사용할 export만 제공하며, 이 또한 TypeScript의 출력물에서 제거.
+  id: string;
+  text: String;
+  completed: boolean;
 };
 
 export default function Home() {
   const [todos, setTodos] = useState<TodoT[]>([]);
   const [newInput, setNewInput] = useState<string>('');
-  const testLog = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.dir(e.target.value);
-  }
+
   const addTodo = () => {
     const newTodo: TodoT = {
       text: newInput,
-      id: (Math.floor(Math.random() * (100 - 1 + 1)) + 1).toString(),
+      id: uniqid(),
       completed: false,
     };
     setTodos((prev) => {
       return [...prev, newTodo];
     });
-  }
-  
+  };
+
   return (
     <>
       <Head>
@@ -39,17 +39,21 @@ export default function Home() {
       <Container>
         <Todo>
           <Title>Simple Todo</Title>
-          {
-            todos?.map(todo => ( 
-              // <p key={todo.id}>{todo.text}</p>
-              <TodoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
-            ))
-          }
-          <input type="text" value={newInput} onChange={(e) => {setNewInput(e.target.value)}} />
-          <button onClick={addTodo}>등록</button>
-          <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setNewInput(e.target.value)}} />
-          {/* <Button onClick={addTodo}>등록 실행 불가 </Button> */}
-       
+          {todos?.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id}
+              text={todo.text}
+              completed={todo.completed}
+            />
+          ))}
+          <Input
+            value={newInput}
+            onChange={(e) => {
+              setNewInput(e.target.value);
+            }}
+          />
+          <Button onClick={addTodo}>등록 실행 불가 </Button>
         </Todo>
       </Container>
     </>
@@ -76,4 +80,3 @@ const Container = styled.main`
   justify-content: center;
   padding: 25px;
 `;
-
