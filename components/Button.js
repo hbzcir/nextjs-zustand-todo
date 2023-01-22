@@ -1,10 +1,6 @@
-import { MouseEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 
-const Button = (props: {
-  onClick: (e: MouseEvent) => void;
-  children: ReactNode;
-}) => {
+const Button = (props) => {
   return <StyleButton onClick={props.onClick}>{props.children}</StyleButton>;
 };
 

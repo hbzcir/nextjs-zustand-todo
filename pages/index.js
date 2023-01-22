@@ -6,19 +6,18 @@ import Input from '../components/Input';
 import Button from 'components/Button';
 import uniqid from 'uniqid';
 
-export type TodoT = {
-  //export type은 타입 문맥에 사용할 export만 제공하며, 이 또한 TypeScript의 출력물에서 제거.
-  id: string;
-  text: String;
-  completed: boolean;
-};
+// export type TodoT = {
+//   id: string;
+//   text: String;
+//   completed: boolean;
+// };
 
 export default function Home() {
-  const [todos, setTodos] = useState<TodoT[]>([]);
-  const [newInput, setNewInput] = useState<string>('');
+  const [todos, setTodos] = useState([]);
+  const [newInput, setNewInput] = useState('');
 
   const addTodo = () => {
-    const newTodo: TodoT = {
+    const newTodo = {
       text: newInput,
       id: uniqid(),
       completed: false,

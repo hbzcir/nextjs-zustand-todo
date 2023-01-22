@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 const StyleInput = styled.input`
   width: 100%;
@@ -11,10 +10,7 @@ const StyleInput = styled.input`
   border-radius: 4px;
   outline: transparent;
 `;
-const Input = (props: {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) => {
+const Input = (props) => {
   return (
     <StyleInput type="text" value={props.value} onChange={props.onChange} />
   );
