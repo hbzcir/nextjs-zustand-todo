@@ -17,6 +17,10 @@ export default function Home() {
   const [newInput, setNewInput] = useState('');
 
   const addTodo = () => {
+    if (newInput.trim() === '') {
+      alert('내용을 입력해주세요');
+      return;
+    }
     const newTodo = {
       text: newInput,
       id: uniqid(),
@@ -25,6 +29,7 @@ export default function Home() {
     setTodos((prev) => {
       return [...prev, newTodo];
     });
+    setNewInput('');
   };
 
   return (
