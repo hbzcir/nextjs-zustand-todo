@@ -1,19 +1,5 @@
 import styled from 'styled-components';
-
-/**
- * placeholder : strng
- * value : string
- * disabled : boolean
- * @returns 
- */
-function FormText(){
-return <>
-  <InputText type="text" />
-</>
-}
-export default FormText;
-
-const InputText = styled.input`
+const StyleInput = styled.input`
   width: 100%;
   height: 36px;
   font-weight: 400;
@@ -23,4 +9,10 @@ const InputText = styled.input`
   border: 1px solid var(--border);
   border-radius: 4px;
   outline: transparent;
-`
+`;
+const Input = (props) => {
+  return (
+    <StyleInput type="text" value={props.value} onChange={props.onChange} />
+  );
+};
+export default Input;
