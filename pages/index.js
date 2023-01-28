@@ -6,12 +6,6 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import uniqid from 'uniqid';
 
-// export type TodoT = {
-//   id: string;
-//   text: String;
-//   completed: boolean;
-// };
-
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [newInput, setNewInput] = useState('');
@@ -32,6 +26,23 @@ export default function Home() {
     setNewInput('');
   };
 
+  const onCompleteClick = (id) => {
+    const targetIndex = todos.findIndex((todo) => todo.id === id);
+    if (targetIndex === -1) {
+      alert('잘못된 id입니다');
+      return;
+    }
+    setTodos((prev) => {
+      const newTodo = {
+        ...prev[targetIndex],
+        completed: !prev[targetIndex].completed,
+      };
+      let newArr = [...prev];
+      newArr.splice(targetIndex, 1, newTodo);
+      return newArr;
+    });
+  };
+
   return (
     <>
       <Head>
@@ -43,14 +54,17 @@ export default function Home() {
       <Container>
         <Todo>
           <Title>Simple Todo</Title>
-          {todos?.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              id={todo.id}
-              text={todo.text}
-              completed={todo.completed}
-            />
-          ))}
+          <TodoListWrapper>
+            {todos?.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                id={todo.id}
+                text={todo.text}
+                completed={todo.completed}
+                onCompleteClick={onCompleteClick}
+              />
+            ))}
+          </TodoListWrapper>
           <Input
             value={newInput}
             onChange={(e) => {
@@ -74,7 +88,6 @@ const Todo = styled.div`
   min-width: 280px;
   margin: 10px 0;
   width: 447px;
-  height: 522px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
 `;
@@ -83,4 +96,11 @@ const Container = styled.main`
   align-content: center;
   justify-content: center;
   padding: 25px;
+`;
+
+const TodoListWrapper = styled.ul`
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding: 16px;
 `;
