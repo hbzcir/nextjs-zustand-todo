@@ -16,7 +16,32 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   const [newInput, setNewInput] = useState('');
 
+  // 빈값일때 x
+  // 입력하고 초기화
+
+  const onCompletedClick = (id) => {
+    const targetIndex = todos.findIndex((a) => {
+      console.log(a.id, id);
+      return a.id === id;
+    });
+
+    const newTodo = {
+      ...todos[targetIndex],
+      completed: !todos[targetIndex].completed,
+    };
+
+    let newArray = [...todos]; // 바뀌는값
+    newArray.splice(targetIndex, 1, newTodo); // splice ***
+
+    setTodos(newArray);
+  };
+
   const addTodo = () => {
+    if (newInput.trim() === '') {
+      alert('값을 넣어라');
+      return;
+    }
+
     const newTodo = {
       text: newInput,
       id: uniqid(),
@@ -25,8 +50,25 @@ export default function Home() {
     setTodos((prev) => {
       return [...prev, newTodo];
     });
+    setNewInput('');
   };
 
+  const onEditComplete = (id, editValue) => {
+    const targetIndex = todos.findIndex((a) => {
+      console.log(a.id, id);
+      return a.id === id;
+    });
+
+    const newTodo = {
+      ...todos[targetIndex],
+      text: editValue,
+    };
+
+    let newArray = [...todos]; // 바뀌는값
+    newArray.splice(targetIndex, 1, newTodo); // splice ***
+
+    setTodos(newArray);
+  };
   return (
     <>
       <Head>
@@ -44,6 +86,8 @@ export default function Home() {
               id={todo.id}
               text={todo.text}
               completed={todo.completed}
+              onCompletedClick={(id) => onCompletedClick(id)}
+              onEditComplete={onEditComplete}
             />
           ))}
           <Input
@@ -70,6 +114,7 @@ const Todo = styled.div`
   margin: 10px 0;
   width: 447px;
   height: 522px;
+  padding: 24px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
 `;
