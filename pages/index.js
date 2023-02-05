@@ -96,7 +96,7 @@ export default function Home() {
               setNewInput(e.target.value);
             }}
           />
-          <Button onClick={addTodo}>등록 실행 불가 </Button>
+          <Button onClick={addTodo}>등록</Button>
         </Todo>
       </Container>
     </>
